@@ -21,3 +21,5 @@ const router = async () => {
   !!content && (content.innerHTML = await page.render());
 };
 
+window.addEventListener("hashchange", router);
+window.addEventListener("load", router);
