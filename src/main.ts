@@ -1,6 +1,6 @@
 import { Home } from "./pages/Home";
 import { Vite } from "./pages/Vite";
-import { setupCounter } from './counter'
+import { Error404 } from "./pages/Error404";
 
 const routes = {
   "/": Home,
@@ -9,4 +9,15 @@ const routes = {
 
 type Routes = typeof routes;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const router = async () => {
+  const content = document.querySelector<HTMLDivElement>("#app");
+  const parsedURL = location.hash.slice(1).toLowerCase() || "/";
+
+  const isRoutes = (parsedURL: string): parsedURL is keyof Routes => {
+    return routes.hasOwnProperty(parsedURL);
+  };
+  const page = isRoutes(parsedURL) ? routes[parsedURL] : Error404;
+
+  !!content && (content.innerHTML = await page.render());
+};
+
