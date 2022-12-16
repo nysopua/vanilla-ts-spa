@@ -2,6 +2,8 @@ import { Home } from "./pages/Home";
 import { Vite } from "./pages/Vite";
 import { Error404 } from "./pages/Error404";
 
+import './style.css'
+
 const routes = {
   "/": Home,
   "/vite": Vite,
